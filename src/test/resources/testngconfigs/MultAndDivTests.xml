@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="multAndDivTest">
+  <test name="allMultAndDivTests">
+    <groups>
+      <run>
+        <include name="multiply and divide operations"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="ru.training.at.hw1.MultOperationTests"/>
+      <class name="ru.training.at.hw1.DivOperationTests"/>
+    </classes>
+  </test>
+</suite>
