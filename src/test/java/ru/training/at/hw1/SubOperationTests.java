@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import ru.training.at.hw1.data.Values;
 import ru.training.at.hw1.groups.Groups;
 
-public class SubOperationTests extends InitCalculator {
+public class SubOperationTests extends TestsInitialization {
 
     @Test(groups = {Groups.ADD_AND_SUBTRACT}, dataProvider = "values", dataProviderClass = Values.class)
     public void subLongValuesTest(long a, long b, long expectedResult) {

@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import ru.training.at.hw1.data.Values;
 import ru.training.at.hw1.groups.Groups;
 
-public class DivOperationTests extends InitCalculator {
+public class DivOperationTests extends TestsInitialization {
 
     @Test(groups = {Groups.MULTIPLY_AND_DIVIDE}, dataProvider = "values", dataProviderClass = Values.class)
     public void divLongValuesTest(long a, long b, long expectedResult) {

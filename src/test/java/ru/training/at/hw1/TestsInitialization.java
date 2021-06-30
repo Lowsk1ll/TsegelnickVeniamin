@@ -3,7 +3,7 @@ package ru.training.at.hw1;
 import com.epam.tat.module4.Calculator;
 import org.testng.annotations.BeforeClass;
 
-public class InitCalculator {
+public class TestsInitialization {
 
     protected Calculator calculator;
 
