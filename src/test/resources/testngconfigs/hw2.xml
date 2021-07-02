@@ -2,8 +2,8 @@
 <suite name="hw2">
   <test name="ex1AndEx2">
     <classes>
-      <class name="ru.training.at.hw2.ex1.FirstExerciseTest"/>
-      <class name="ru.training.at.hw2.ex2.SecondExerciseTest"/>
+      <class name="ru.training.at.hw2.ex1.HomePageContentTest"/>
+      <class name="ru.training.at.hw2.ex2.DifferentElementsPageContentTest"/>
     </classes>
   </test>
 </suite>

@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import ru.training.at.hw2.TestsInitialization;
 
-public class FirstExerciseTest extends TestsInitialization {
+public class HomePageContentTest extends TestsInitialization {
 
     @Test
     public void firstExerciseTest() {

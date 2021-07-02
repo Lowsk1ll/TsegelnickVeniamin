@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.training.at.hw2.TestsInitialization;
 
-public class SecondExerciseTest extends TestsInitialization {
+public class DifferentElementsPageContentTest extends TestsInitialization {
     @Test
     public void secondExerciseTest() {
 
