@@ -9,7 +9,7 @@ import ru.training.at.hw2.TestsInitialization;
 
 public class SecondExerciseTest extends TestsInitialization {
     @Test
-    public void exerciseTest() {
+    public void secondExerciseTest() {
 
         //1.Open test site
         driver.get("https://jdi-testing.github.io/jdi-light/index.html");
