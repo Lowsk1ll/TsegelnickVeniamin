@@ -98,5 +98,6 @@ public class HomePageContentTest extends TestsInitialization {
             leftMetalsAndColorsButton.isDisplayed() & leftMetalsAndColorsButton.getText().equals("Metals & Colors"));
         softAssert.assertTrue(
             leftElementsPacksButton.isDisplayed() & leftElementsPacksButton.getText().equals("Elements packs"));
+        softAssert.assertAll();
     }
 }
