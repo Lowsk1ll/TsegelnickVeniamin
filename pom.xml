@@ -140,6 +140,13 @@
         <testng.suite.file>src/test/resources/testngconfigs/hw2.xml</testng.suite.file>
       </properties>
     </profile>
+    <profile>
+      <id>hw3</id>
+      <properties>
+        <testng.suite.file>src/test/resources/testngconfigs/hw3.xml</testng.suite.file>
+      </properties>
+    </profile>
+
   </profiles>
 
 </project>
