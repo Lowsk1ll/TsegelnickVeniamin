@@ -25,7 +25,7 @@ public class TestsInitialization {
 
     @AfterClass
     public void close() {
-        if ((driver != null)) {
+        if (driver != null) {
             driver.close();
         }
     }
