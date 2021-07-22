@@ -1,19 +1,14 @@
 package ru.training.at.hw4.test;
 
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 import java.util.List;
 import org.testng.annotations.Test;
 import ru.training.at.hw4.data.Values;
 
-public class DifferentElementsPageContentTest extends TestsInitialization {
 
-
-    @Feature("Checking allure annotations")
-    @Story("first exercise from 2-3 hw")
+public class FailureTest extends TestsInitialization {
     @Test(dataProvider = "values", dataProviderClass = Values.class)
-    public void secondExerciseTest(String expectedTitle, String userName, String password, String expectedUserName,
-                                   List<String> expectedCheckboxAndRadioElements) {
+    public void firstFailureTest(String expectedTitle, String userName, String password, String expectedUserName,
+                                 List<String> expectedCheckboxAndRadioElements) {
 
         //Check browser title
         assertionStep.checkBrowserTitle(expectedTitle);

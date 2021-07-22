@@ -31,7 +31,7 @@ public class TestsInitialization {
         testContext.setAttribute("driver", driver);
     }
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void close() {
         if (driver != null) {
             driver.close();

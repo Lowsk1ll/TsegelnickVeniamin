@@ -9,8 +9,8 @@ import ru.training.at.hw4.data.Values;
 public class HomePageContentTest extends TestsInitialization {
 
 
-    @Feature("Проверка аннотаций аллюра")
-    @Story("первое упражнение 2-3 домашки")
+    @Feature("Checking allure annotations")
+    @Story("first exercise from 2-3 hw")
     @Test(dataProvider = "values", dataProviderClass = Values.class)
     public void firstExerciseTest(String expectedTitle, String userName, String password, String expectedUserName) {
 

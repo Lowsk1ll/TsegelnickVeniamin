@@ -15,7 +15,7 @@ public class AllureListener implements ITestListener {
         attachScreenShot(driver);
     }
 
-    @Attachment(type = "image/png", fileExtension = ".png")
+    @Attachment(value = "Page screen", type = "image/png", fileExtension = ".png")
     private byte[] attachScreenShot(WebDriver driver) {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }

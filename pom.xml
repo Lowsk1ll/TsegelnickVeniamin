@@ -188,5 +188,11 @@
         <testng.suite.file>src/test/resources/testngconfigs/hw4.xml</testng.suite.file>
       </properties>
     </profile>
+    <profile>
+      <id>hw4failure</id>
+      <properties>
+        <testng.suite.file>src/test/resources/testngconfigs/hw4failure.xml</testng.suite.file>
+      </properties>
+    </profile>
   </profiles>
 </project>

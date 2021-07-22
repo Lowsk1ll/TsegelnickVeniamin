@@ -10,17 +10,17 @@ public class ActionStep extends AbstractStep {
         super(driver, wait);
     }
 
-    @Step("авторизация пользователя")
+    @Step("user authorization")
     public void loginUser(String userName, String password) {
         homePage.loginUser(userName, password);
     }
 
-    @Step("открытие страницы с различными елементами")
+    @Step("opening a page with various elements")
     public void openDifferentElementsPage() {
         homePage.openDifferentElementsPage();
     }
 
-    @Step("выбор различных елементов")
+    @Step("selection of different elements")
     public void selectDifferentElements() {
         differentElementsPage.selectWaterElement();
         differentElementsPage.selectWindElement();

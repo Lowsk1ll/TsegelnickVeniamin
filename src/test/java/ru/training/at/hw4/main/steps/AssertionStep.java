@@ -19,17 +19,17 @@ public class AssertionStep extends AbstractStep {
         this.driver = driver;
     }
 
-    @Step("Проверка заголовка браузера")
+    @Step("Browser title check")
     public void checkBrowserTitle(String expectedTitle) {
         Assert.assertEquals(driver.getTitle(), expectedTitle);
     }
 
-    @Step("Проверка имения пользователя")
+    @Step("Username check")
     public void checkUserName(String expectedUserName) {
         Assert.assertTrue(homePage.userName.getText().equals(expectedUserName) & homePage.userName.isDisplayed());
     }
 
-    @Step("Проверка корректного отображения елементов главного меню")
+    @Step("Checking the correct display of the main menu items")
     public void checkHeaderMenuElements() {
         Assert.assertTrue(homePage.headerSection.headerMenu.stream().allMatch(WebElement::isDisplayed));
         Assert.assertTrue(homePage.headerSection.headerMenu.stream().anyMatch(s -> s.getText().equals("HOME")));
@@ -39,14 +39,14 @@ public class AssertionStep extends AbstractStep {
             homePage.headerSection.headerMenu.stream().anyMatch(s -> s.getText().equals("METALS & COLORS")));
     }
 
-    @Step("Проверка отображения картинок")
+    @Step("Checking the display of pictures")
     public void checkImages() {
         Assert.assertTrue(
             Stream.of(homePage.firstImage, homePage.secondImage, homePage.thirdImage, homePage.fourthImage)
                   .allMatch(WebElement::isDisplayed));
     }
 
-    @Step("Проверка корректности текста под картинками")
+    @Step("Checking text under pictures")
     public void checkTextUnderImages() {
         Assert.assertTrue(Stream
             .of(homePage.textUnderFirstImage, homePage.textUnderSecondImage, homePage.textUnderThirdImage,
@@ -57,7 +57,7 @@ public class AssertionStep extends AbstractStep {
         Assert.assertEquals(homePage.textUnderFourthImage.getText(), Values.TEXT_UNDER_FOURTH_IMAGE);
     }
 
-    @Step("Проверка фрейма и кнопки внутри него")
+    @Step("Checking the frame and buttons inside it")
     public void checkFrameElements() {
         Assert.assertTrue(homePage.frameCardTitle.isDisplayed());
         driver.switchTo().frame(homePage.frameCardTitle);
@@ -65,7 +65,7 @@ public class AssertionStep extends AbstractStep {
         driver.switchTo().defaultContent();
     }
 
-    @Step("Проверка элементов левого меню")
+    @Step("Checking left menu items")
     public void checkLeftMenuElements() {
         Assert.assertTrue(Stream.of(homePage.leftSection.homeButton, homePage.leftSection.contactFormButton,
             homePage.leftSection.serviceButton, homePage.leftSection.metalsAndColorsButton,
@@ -78,7 +78,7 @@ public class AssertionStep extends AbstractStep {
         Assert.assertEquals(homePage.leftSection.elementsPacksButton.getText(), "Elements packs");
     }
 
-    @Step("Проверка лог листа")
+    @Step("Checking the log list")
     public void checkLogList(List<String> expectedCheckboxAndRadioElements) {
         Assert.assertTrue(differentElementsPage.logList.isDisplayed()
             & expectedCheckboxAndRadioElements.stream()
@@ -86,13 +86,13 @@ public class AssertionStep extends AbstractStep {
                                                   .getText().contains(s)));
     }
 
-    @Step("Проверка выбранных элементов")
+    @Step("Checking selected items")
     public void checkSelectedElements() {
         Assert.assertTrue(Stream.of(differentElementsPage.waterCheckBox, differentElementsPage.windCheckBox,
             differentElementsPage.selenRadio).allMatch(WebElement::isSelected));
     }
 
-    @Step("Проверка выпадающего меню")
+    @Step("Checking the dropdown menu")
     public void checkDropDownMenu() {
         Select colors = new Select(differentElementsPage.colorsMenu);
         Assert.assertEquals(colors.getFirstSelectedOption().getText(), "Yellow");
