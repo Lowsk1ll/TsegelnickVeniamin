@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="hw4">
+  <test name="ex1AndEx2">
+    <classes>
+      <class name="ru.training.at.hw4.test.HomePageContentTest"/>
+      <class name="ru.training.at.hw4.test.DifferentElementsPageContentTest"/>
+    </classes>
+  </test>
+</suite>
