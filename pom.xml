@@ -16,6 +16,11 @@
     <checkstyle.version>8.42</checkstyle.version>
     <testng.version>7.4.0</testng.version>
     <commons-lang3.version>3.12.0</commons-lang3.version>
+    <allure.plugin.version>2.10.0</allure.plugin.version>
+    <allure.version>2.10.0</allure.version>
+    <aspectj.version>1.9.5</aspectj.version>
+    <maven.surefire.version>3.0.0-M5</maven.surefire.version>
+    <maven.compiler.version>3.8.1</maven.compiler.version>
     <testng.suite.file/>
   </properties>
 
@@ -50,6 +55,14 @@
       <artifactId>selenium-java</artifactId>
       <version>3.141.59</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-testng -->
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-testng</artifactId>
+      <version>${allure.version}</version>
+    </dependency>
+
 
   </dependencies>
 
@@ -86,8 +99,34 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven.surefire.version}</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>${testng.suite.file}</suiteXmlFile>
+          </suiteXmlFiles>
+          <argLine>
+            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+          </argLine>
+          <systemProperties>
+            <property>
+              <name>allure.results.directory</name>
+              <value>${project.build.directory}/allure-results</value>
+            </property>
+          </systemProperties>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>${maven.compiler.version}</version>
         <configuration>
           <!--  encoding tag is omitted because it's default value is
           ${project.build.source.encoding} which is already defined in properties section  -->
@@ -98,14 +137,11 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.0.0-M5</version>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>${allure.plugin.version}</version>
         <configuration>
-          <suiteXmlFiles>
-            <suiteXmlFile>${testng.suite.file}</suiteXmlFile>
-          </suiteXmlFiles>
-          <testFailureIgnore>true</testFailureIgnore>
+          <reportVersion>${allure.version}</reportVersion>
         </configuration>
       </plugin>
     </plugins>
@@ -146,7 +182,11 @@
         <testng.suite.file>src/test/resources/testngconfigs/hw3.xml</testng.suite.file>
       </properties>
     </profile>
-
+    <profile>
+      <id>hw4</id>
+      <properties>
+        <testng.suite.file>src/test/resources/testngconfigs/hw4.xml</testng.suite.file>
+      </properties>
+    </profile>
   </profiles>
-
 </project>
