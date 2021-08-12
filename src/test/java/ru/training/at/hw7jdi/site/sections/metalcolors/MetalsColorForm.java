@@ -1,4 +1,4 @@
-package ru.training.at.hw7jdi.site.sections;
+package ru.training.at.hw7jdi.site.sections.metalcolors;
 
 import com.epam.jdi.light.driver.WebDriverByUtils;
 import com.epam.jdi.light.elements.common.UIElement;
@@ -10,12 +10,13 @@ import java.util.Arrays;
 import org.openqa.selenium.By;
 import ru.training.at.hw7jdi.data.ReadData;
 import ru.training.at.hw7jdi.entities.MetalsColorsData;
+import ru.training.at.hw7jdi.site.sections.metalcolors.elements.NatureElements;
 
 public class MetalsColorForm {
     public static int numberOfData;
+    public static String file;
     public static By oddNumber = By.xpath("//*[@id='odds-selector']/p/label[text()='%s']");
     public static By evenNumber = By.xpath("//*[@id='even-selector']/p/label[text()='%s']");
-    public static By natureElement = By.xpath("//*[@id='elements-checklist']/p/label[text()='%s']");
 
     @JDropdown(root = "div[ui=dropdown]",
                value = ".filter-option",
@@ -30,6 +31,7 @@ public class MetalsColorForm {
     public static Dropdown metals;
 
     @JDropdown(root = "div[ui=droplist]",
+               value = "div#vegetables>div>button.btn",
                list = "li",
                expand = ".caret")
     public static Dropdown vegetables;
@@ -49,35 +51,38 @@ public class MetalsColorForm {
     @XPath("//li[@class='sal-res']")
     public static Text vegetablesResult;
 
+    @XPath("//*[@id='elements-checklist']")
+    public static NatureElements natureElements;
+
     public static UIElement getOddNumber() {
         return new UIElement(
-            WebDriverByUtils.fillByTemplate(oddNumber, ReadData.readJsonForMetalsColors(numberOfData).summary[0]));
+            WebDriverByUtils
+                .fillByTemplate(oddNumber, ReadData.readJsonForMetalsColors(file, numberOfData).summary[0]));
     }
 
     public static UIElement getEvenNumber() {
         return new UIElement(
-            WebDriverByUtils.fillByTemplate(evenNumber, ReadData.readJsonForMetalsColors(numberOfData).summary[1]));
+            WebDriverByUtils
+                .fillByTemplate(evenNumber, ReadData.readJsonForMetalsColors(file, numberOfData).summary[1]));
     }
 
-    public static UIElement getNatureElement(String element) {
-        return new UIElement(WebDriverByUtils.fillByTemplate(natureElement, element));
-    }
-
-    public static void fillByData(int numberOfData) {
+    public static void fillByData(String file, int numberOfData) {
         MetalsColorForm.numberOfData = numberOfData;
+        MetalsColorForm.file = file;
         getOddNumber().click();
         getEvenNumber().click();
-        Arrays.stream(ReadData.readJsonForMetalsColors(numberOfData).elements)
-              .forEach(s -> getNatureElement(s).click());
-        colors.select(ReadData.readJsonForMetalsColors(numberOfData).color);
-        metals.select(ReadData.readJsonForMetalsColors(numberOfData).metals);
-        vegetables.select("Vegetables");
-        Arrays.stream(ReadData.readJsonForMetalsColors(numberOfData).vegetables)
+        natureElements.deselectAllNatureElements();
+        deselectAllVegetables();
+        MetalsColorsData metalsColorsData = ReadData.readJsonForMetalsColors(file, numberOfData);
+        Arrays.stream(metalsColorsData.elements).forEach(s -> natureElements.getElement(s).click());
+        colors.select(metalsColorsData.color);
+        metals.select(metalsColorsData.metals);
+        Arrays.stream(metalsColorsData.vegetables)
               .forEach(s -> vegetables.select(s));
     }
 
-    public static void checkByData(int numberOfData) {
-        MetalsColorsData metalsColorsData = ReadData.readJsonForMetalsColors(numberOfData);
+    public static void checkByData(String file, int numberOfData) {
+        MetalsColorsData metalsColorsData = ReadData.readJsonForMetalsColors(file, numberOfData);
         summaryResult.is().text("Summary: " + (metalsColorsData.summary[0] + metalsColorsData.summary[1]));
         elementsResult.is()
                       .text("Elements: " + String.join(", ", metalsColorsData.elements));
@@ -85,5 +90,9 @@ public class MetalsColorForm {
         metalResult.is().text("Metal: " + metalsColorsData.metals);
         vegetablesResult.is().text(
             "Vegetables: " + String.join(", ", metalsColorsData.vegetables));
+    }
+
+    public static void deselectAllVegetables() {
+        Arrays.stream(vegetables.getValue().split(",")).filter(s -> (!s.isEmpty())).forEach(s -> vegetables.select(s));
     }
 }
