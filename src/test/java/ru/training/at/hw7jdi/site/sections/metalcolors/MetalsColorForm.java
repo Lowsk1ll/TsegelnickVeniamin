@@ -11,7 +11,6 @@ import java.util.Arrays;
 import org.openqa.selenium.By;
 import ru.training.at.hw7jdi.data.ReadData;
 import ru.training.at.hw7jdi.entities.MetalsColorsData;
-import ru.training.at.hw7jdi.site.pages.MetalsColorsPage;
 import ru.training.at.hw7jdi.site.sections.metalcolors.elements.NatureElements;
 
 public class MetalsColorForm {
@@ -70,7 +69,7 @@ public class MetalsColorForm {
                 .fillByTemplate(evenNumber, data.summary[1]));
     }
 
-    public static void fillByData(String file) {
+    public static void fillAndCheckByData(String file) {
         ReadData.readJsonForMetalsColors(file).forEach(data -> {
             natureElements.deselectAllNatureElements();
             deselectAllVegetables();

@@ -1,10 +1,8 @@
 package ru.training.at.hw7jdi.site.sections.metalcolors.elements;
 
 import com.epam.jdi.light.elements.complex.CanBeSelected;
-import com.epam.jdi.light.elements.complex.WebList;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
-import java.util.List;
 import java.util.stream.Stream;
 
 public class NatureElements {

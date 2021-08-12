@@ -1,12 +1,10 @@
 package ru.training.at.hw7jdi.test;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.training.at.hw7jdi.data.DProvider;
 import ru.training.at.hw7jdi.entities.User;
 import ru.training.at.hw7jdi.site.SiteJdi;
 import ru.training.at.hw7jdi.site.sections.metalcolors.MetalsColorForm;
-import ru.training.at.hw7jdi.site.sections.metalcolors.elements.NatureElements;
 import ru.training.at.hw7jdi.states.States;
 
 public class FillMetalColorsFormsTests implements InitTest {
@@ -31,6 +29,6 @@ public class FillMetalColorsFormsTests implements InitTest {
     public void fillAndCheckMetalColorsForms(String file) {
         States.shouldBeLoggedIn();
         SiteJdi.metalsColorsPage.shouldBeOpened();
-        MetalsColorForm.fillByData(file);
+        MetalsColorForm.fillAndCheckByData(file);
     }
 }
