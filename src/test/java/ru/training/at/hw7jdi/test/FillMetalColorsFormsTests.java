@@ -28,11 +28,9 @@ public class FillMetalColorsFormsTests implements InitTest {
     }
 
     @Test(dataProvider = "data-provider", dataProviderClass = DProvider.class)
-    public void fillAndCheckMetalColorsForms(String file, int numberOfData) {
+    public void fillAndCheckMetalColorsForms(String file) {
         States.shouldBeLoggedIn();
         SiteJdi.metalsColorsPage.shouldBeOpened();
-        MetalsColorForm.fillByData(file, numberOfData);
-        SiteJdi.metalsColorsPage.submit.click();
-        MetalsColorForm.checkByData(file, numberOfData);
+        MetalsColorForm.fillByData(file);
     }
 }

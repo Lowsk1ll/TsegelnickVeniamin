@@ -10,17 +10,17 @@ import ru.training.at.hw7jdi.entities.MetalsColorsData;
 
 public class ReadData {
 
-    public static MetalsColorsData readJsonForMetalsColors(String file, int numberOfData) {
-        MetalsColorsData result = new MetalsColorsData();
+    public static List<MetalsColorsData> readJsonForMetalsColors(String file) {
+        List<MetalsColorsData> result = new ArrayList<>();
         Gson gson = new Gson();
         try {
             FileReader reader = new FileReader("src/test/resources/" + file);
             JsonObject data = gson.fromJson(reader, JsonObject.class);
-            result = gson.fromJson(data.getAsJsonObject("data_" + numberOfData), MetalsColorsData.class);
+            data.keySet()
+                .forEach(s -> result.add(gson.fromJson(data.getAsJsonObject(s), MetalsColorsData.class)));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return result;
     }
-
 }

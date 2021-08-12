@@ -5,15 +5,16 @@ import com.epam.jdi.light.elements.common.UIElement;
 import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
+import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import java.util.Arrays;
 import org.openqa.selenium.By;
 import ru.training.at.hw7jdi.data.ReadData;
 import ru.training.at.hw7jdi.entities.MetalsColorsData;
+import ru.training.at.hw7jdi.site.pages.MetalsColorsPage;
 import ru.training.at.hw7jdi.site.sections.metalcolors.elements.NatureElements;
 
 public class MetalsColorForm {
-    public static int numberOfData;
     public static String file;
     public static By oddNumber = By.xpath("//*[@id='odds-selector']/p/label[text()='%s']");
     public static By evenNumber = By.xpath("//*[@id='even-selector']/p/label[text()='%s']");
@@ -54,42 +55,47 @@ public class MetalsColorForm {
     @XPath("//*[@id='elements-checklist']")
     public static NatureElements natureElements;
 
-    public static UIElement getOddNumber() {
+    @XPath("//*[text()=\"Submit\"]")
+    public static Button submit;
+
+    public static UIElement getOddNumber(MetalsColorsData data) {
         return new UIElement(
             WebDriverByUtils
-                .fillByTemplate(oddNumber, ReadData.readJsonForMetalsColors(file, numberOfData).summary[0]));
+                .fillByTemplate(oddNumber, data.summary[0]));
     }
 
-    public static UIElement getEvenNumber() {
+    public static UIElement getEvenNumber(MetalsColorsData data) {
         return new UIElement(
             WebDriverByUtils
-                .fillByTemplate(evenNumber, ReadData.readJsonForMetalsColors(file, numberOfData).summary[1]));
+                .fillByTemplate(evenNumber, data.summary[1]));
     }
 
-    public static void fillByData(String file, int numberOfData) {
-        MetalsColorForm.numberOfData = numberOfData;
-        MetalsColorForm.file = file;
-        getOddNumber().click();
-        getEvenNumber().click();
-        natureElements.deselectAllNatureElements();
-        deselectAllVegetables();
-        MetalsColorsData metalsColorsData = ReadData.readJsonForMetalsColors(file, numberOfData);
-        Arrays.stream(metalsColorsData.elements).forEach(s -> natureElements.getElement(s).click());
-        colors.select(metalsColorsData.color);
-        metals.select(metalsColorsData.metals);
-        Arrays.stream(metalsColorsData.vegetables)
-              .forEach(s -> vegetables.select(s));
+    public static void fillByData(String file) {
+        ReadData.readJsonForMetalsColors(file).forEach(data -> {
+            natureElements.deselectAllNatureElements();
+            deselectAllVegetables();
+            getOddNumber(data).click();
+            getEvenNumber(data).click();
+            Arrays.stream(data.elements).forEach(element -> natureElements.getElement(element).click());
+            colors.select(data.color);
+            metals.select(data.metals);
+            Arrays.stream(data.vegetables)
+                  .forEach(vegetable -> vegetables.select(vegetable));
+            submit.click();
+            checkByData(data);
+        });
+
+
     }
 
-    public static void checkByData(String file, int numberOfData) {
-        MetalsColorsData metalsColorsData = ReadData.readJsonForMetalsColors(file, numberOfData);
-        summaryResult.is().text("Summary: " + (metalsColorsData.summary[0] + metalsColorsData.summary[1]));
+    public static void checkByData(MetalsColorsData data) {
+        summaryResult.is().text("Summary: " + (data.summary[0] + data.summary[1]));
         elementsResult.is()
-                      .text("Elements: " + String.join(", ", metalsColorsData.elements));
-        colorResult.is().text("Color: " + metalsColorsData.color);
-        metalResult.is().text("Metal: " + metalsColorsData.metals);
+                      .text("Elements: " + String.join(", ", data.elements));
+        colorResult.is().text("Color: " + data.color);
+        metalResult.is().text("Metal: " + data.metals);
         vegetablesResult.is().text(
-            "Vegetables: " + String.join(", ", metalsColorsData.vegetables));
+            "Vegetables: " + String.join(", ", data.vegetables));
     }
 
     public static void deselectAllVegetables() {

@@ -14,8 +14,4 @@ public class MetalsColorsPage extends WebPage {
     @XPath("//*[@class='form']")
     public MetalsColorForm metalsColorForm;
 
-    @XPath("//*[text()=\"Submit\"]")
-    public Button submit;
-
-
 }
