@@ -1,7 +1,9 @@
 package ru.training.at.hw7jdi.test;
 
+import java.util.List;
 import org.testng.annotations.Test;
 import ru.training.at.hw7jdi.data.DProvider;
+import ru.training.at.hw7jdi.entities.MetalsColorsData;
 import ru.training.at.hw7jdi.entities.User;
 import ru.training.at.hw7jdi.site.SiteJdi;
 import ru.training.at.hw7jdi.site.sections.metalcolors.MetalsColorForm;
@@ -26,9 +28,9 @@ public class FillMetalColorsFormsTests implements InitTest {
     }
 
     @Test(dataProvider = "data-provider", dataProviderClass = DProvider.class)
-    public void fillAndCheckMetalColorsForms(String file) {
+    public void fillAndCheckMetalColorsForms(List<MetalsColorsData> data) {
         States.shouldBeLoggedIn();
         SiteJdi.metalsColorsPage.shouldBeOpened();
-        MetalsColorForm.fillAndCheckByData(file);
+        MetalsColorForm.fillAndCheckByData(data);
     }
 }
