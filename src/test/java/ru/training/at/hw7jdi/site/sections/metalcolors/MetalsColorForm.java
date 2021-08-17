@@ -8,9 +8,7 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 import java.util.Arrays;
-import java.util.List;
 import org.openqa.selenium.By;
-import ru.training.at.hw7jdi.data.ReadData;
 import ru.training.at.hw7jdi.entities.MetalsColorsData;
 import ru.training.at.hw7jdi.site.sections.metalcolors.elements.NatureElements;
 
@@ -70,22 +68,14 @@ public class MetalsColorForm {
                 .fillByTemplate(evenNumber, data.summary[1]));
     }
 
-    public static void fillAndCheckByData(List<MetalsColorsData> metalsColorsData) {
-        metalsColorsData.forEach(data -> {
-            natureElements.deselectAllNatureElements();
-            deselectAllVegetables();
-            getOddNumber(data).click();
-            getEvenNumber(data).click();
-            Arrays.stream(data.elements).forEach(element -> natureElements.getElement(element).click());
-            colors.select(data.color);
-            metals.select(data.metals);
-            Arrays.stream(data.vegetables)
-                  .forEach(vegetable -> vegetables.select(vegetable));
-            submit.click();
-            checkByData(data);
-        });
-
-
+    public static void fillByData(MetalsColorsData metalsColorsData) {
+        getOddNumber(metalsColorsData).click();
+        getEvenNumber(metalsColorsData).click();
+        Arrays.stream(metalsColorsData.elements).forEach(element -> natureElements.getElement(element).click());
+        colors.select(metalsColorsData.color);
+        metals.select(metalsColorsData.metals);
+        Arrays.stream(metalsColorsData.vegetables)
+              .forEach(vegetable -> vegetables.select(vegetable));
     }
 
     public static void checkByData(MetalsColorsData data) {
