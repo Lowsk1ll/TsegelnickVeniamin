@@ -6,7 +6,6 @@ import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.Css;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
-import java.awt.Button;
 import ru.training.at.hw7jdi.forms.LoginForm;
 import ru.training.at.hw7jdi.site.pages.HomePage;
 import ru.training.at.hw7jdi.site.pages.MetalsColorsPage;

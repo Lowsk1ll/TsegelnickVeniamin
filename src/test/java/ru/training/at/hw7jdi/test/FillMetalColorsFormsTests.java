@@ -1,6 +1,6 @@
 package ru.training.at.hw7jdi.test;
 
-import java.util.List;
+import io.cucumber.java.ro.Si;
 import org.testng.annotations.Test;
 import ru.training.at.hw7jdi.data.DProvider;
 import ru.training.at.hw7jdi.entities.MetalsColorsData;
@@ -33,8 +33,8 @@ public class FillMetalColorsFormsTests implements InitTest {
         SiteJdi.metalsColorsPage.shouldBeOpened();
         MetalsColorForm.deselectAllVegetables();
         MetalsColorForm.natureElements.deselectAllNatureElements();
-        MetalsColorForm.fillByData(data);
-        MetalsColorForm.submit.click();
-        MetalsColorForm.checkByData(data);
+        SiteJdi.metalsColorsPage.metalsColorForm.fill(data);
+        SiteJdi.metalsColorsPage.metalsColorForm.submit();
+        SiteJdi.metalsColorsPage.result.checkResults(data);
     }
 }
