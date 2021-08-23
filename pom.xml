@@ -89,6 +89,17 @@
       <version>1.3.13</version>
     </dependency>
 
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>rest-assured</artifactId>
+      <version>4.3.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-core</artifactId>
+      <version>2.2</version>
+    </dependency>
 
   </dependencies>
 
@@ -170,6 +181,26 @@
           <reportVersion>${allure.version}</reportVersion>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.jsonschema2pojo</groupId>
+        <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+        <version>1.0.2</version>
+        <configuration>
+          <sourceDirectory>${basedir}/src/test/resources/schemes</sourceDirectory>
+          <outputDirectory>${basedir}/src/test/java/ru/training/at/hw8api/main</outputDirectory>
+          <targetPackage>beans</targetPackage>
+          <addCompileSourceRoot>true</addCompileSourceRoot>
+          <sourceType>json</sourceType>
+          <annotationStyle>gson</annotationStyle>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
     <resources>
       <resource>
@@ -245,6 +276,12 @@
       <id>hw7Jdi</id>
       <properties>
         <testng.suite.file>src/test/resources/testngconfigs/hw7Jdi.xml</testng.suite.file>
+      </properties>
+    </profile>
+    <profile>
+      <id>hw8api</id>
+      <properties>
+        <testng.suite.file>src/test/resources/testngconfigs/hw8api.xml</testng.suite.file>
       </properties>
     </profile>
   </profiles>
