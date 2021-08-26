@@ -1,61 +1,85 @@
 package ru.training.at.hw8api.test;
 
+import static apihw.constants.ParametrExamples.DESCRIPTION_EXAMPLE;
+import static apihw.constants.ParametrExamples.GREEN_NAME_EXAMPLE;
+import static apihw.constants.ParametrExamples.NAME_EXAMPLE;
+import static apihw.constants.ParametrExamples.PREFS_BACKGROUND_EXAMPLE;
+import static apihw.constants.ParametrExamples.UPDATED_NAME;
+import static apihw.constants.ParametrExamples.YELLOW_NAME_EXAMPLE;
+import static apihw.core.TrelloBoardsServiceObj.getTrelloAnswer;
+import static apihw.core.TrelloBoardsServiceObj.goodResponseSpecification;
+import static apihw.core.TrelloBoardsServiceObj.requestBuilder;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
-import static ru.training.at.hw8api.main.core.TrelloBoardsServiceObj.getTrelloAnswer;
-import static ru.training.at.hw8api.main.core.TrelloBoardsServiceObj.goodResponseSpecification;
-import static ru.training.at.hw8api.main.core.TrelloBoardsServiceObj.requestBuilder;
 
+import apihw.beans.TrelloAnswers;
+import apihw.constants.ParametersName;
+import apihw.core.DataProviderForTrello;
 import io.restassured.http.Method;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import ru.training.at.hw8api.main.beans.TrelloAnswers;
-import ru.training.at.hw8api.main.constants.ParametersName;
-import ru.training.at.hw8api.main.constants.ParametrExamples;
-import ru.training.at.hw8api.main.core.DataProviderForTrello;
 
 public class TrelloApiTests {
+    public static String boardId;
+    public TrelloAnswers result;
 
-    @Test(dataProvider = "createBoardProvider", dataProviderClass = DataProviderForTrello.class)
-    public void createTable(String name) {
-        TrelloAnswers result = getTrelloAnswer(requestBuilder()
-            .setName(name)
+    @BeforeMethod(onlyForGroups = {"delete", "update", "get"})
+    public void initialize() {
+        result = getTrelloAnswer(requestBuilder()
+            .setName(NAME_EXAMPLE)
             .setMethod(Method.POST)
             .buildRequest()
-            .sendRequest());
+            .sendRequestForCreate());
+        boardId = result.getId();
+    }
+
+    @Test(groups = {"create"}, dataProvider = "createBoardProvider", dataProviderClass = DataProviderForTrello.class)
+    public void createTable(String name) {
+        result = getTrelloAnswer(requestBuilder()
+            .setName(NAME_EXAMPLE)
+            .setMethod(Method.POST)
+            .buildRequest()
+            .sendRequestForCreate());
+        boardId = result.getId();
         assertThat("Api create table with name: " + name, result, hasProperty(ParametersName.NAME, is(name)));
     }
 
-    @Test(dataProvider = "createBoardWithDescriptionProvider", dataProviderClass = DataProviderForTrello.class)
-    public void createTableWithDescription(String name, String description) {
-        TrelloAnswers result = getTrelloAnswer(requestBuilder()
-            .setName(name)
-            .setDescription(description)
+    @Test(groups = {"create"},
+          dataProvider = "createBoardWithDescriptionProvider",
+          dataProviderClass = DataProviderForTrello.class)
+    public void createTableWithDescription(String description) {
+        result = getTrelloAnswer(requestBuilder()
+            .setName(NAME_EXAMPLE)
+            .setDescription(DESCRIPTION_EXAMPLE)
             .setMethod(Method.POST)
             .buildRequest()
-            .sendRequest());
+            .sendRequestForCreate());
+        boardId = result.getId();
         assertThat("Api create table with description: " + description, result,
             hasProperty(ParametersName.DESCRIPTION, is(description)));
     }
 
-    @Test(dataProvider = "createBoardWithBackgroundProvider", dataProviderClass = DataProviderForTrello.class)
-    public void createTableWithBackground(String name, String background) {
-        TrelloAnswers result = getTrelloAnswer(requestBuilder()
-            .setName(name)
-            .setBackground(background)
+    @Test(groups = {"create"},
+          dataProvider = "createBoardWithBackgroundProvider",
+          dataProviderClass = DataProviderForTrello.class)
+    public void createTableWithBackground(String background) {
+        result = getTrelloAnswer(requestBuilder()
+            .setName(NAME_EXAMPLE)
+            .setBackground(PREFS_BACKGROUND_EXAMPLE)
             .setMethod(Method.POST)
             .buildRequest()
-            .sendRequest());
+            .sendRequestForCreate());
+        boardId = result.getId();
         assertThat("Api create table with background " + background, result.getPrefs(),
             hasProperty(ParametersName.BACKGROUND, is(background)));
     }
 
-    @Test(dataProvider = "deleteBoardDataProvider", dataProviderClass = DataProviderForTrello.class)
-    public void deleteTableWithId(String id) {
+    @Test(groups = {"delete"})
+    public void deleteTableWithId() {
         requestBuilder()
-            .setId(id)
+            .setId(boardId)
             .setMethod(Method.DELETE)
             .buildRequest()
             .sendRequest()
@@ -63,95 +87,83 @@ public class TrelloApiTests {
             .spec(goodResponseSpecification());
     }
 
-    @Test(dataProvider = "getBoardDataProvider", dataProviderClass = DataProviderForTrello.class, alwaysRun = true)
-    public void getTableWithId(String id) {
+    @Test(groups = {"get"})
+    public void getTableWithId() {
         TrelloAnswers result = getTrelloAnswer(requestBuilder()
-            .setId(id)
+            .setId(boardId)
             .setMethod(Method.GET)
             .buildRequest()
             .sendRequest());
-        assertThat("Api get table with id: " + id, result,
-            hasProperty(ParametersName.ID, is(id)));
+        assertThat("Api get table with id: " + boardId, result,
+            hasProperty(ParametersName.ID, is(boardId)));
     }
 
-    @BeforeClass(alwaysRun = true)
-    public void createTableForUpdate() {
-        ParametrExamples.ID = getTrelloAnswer(requestBuilder()
-            .setName("Table for update")
-            .setMethod(Method.POST)
-            .buildRequest()
-            .sendRequest()).getId();
-    }
-
-    @Test
+    @Test(groups = {"update"})
     public void updateTableName() {
         TrelloAnswers result = getTrelloAnswer(requestBuilder()
-            .setId(ParametrExamples.ID)
-            .setName(ParametrExamples.UPDATED_NAME)
+            .setId(boardId)
+            .setName(UPDATED_NAME)
             .setMethod(Method.PUT)
             .buildRequest()
             .sendRequest());
-        assertThat("Api update table name with id: " + ParametrExamples.ID, result,
-            hasProperty(ParametersName.NAME, is(ParametrExamples.UPDATED_NAME)));
+        assertThat("Api update table name with id: " + boardId, result,
+            hasProperty(ParametersName.NAME, is(UPDATED_NAME)));
     }
 
-    @Test
+    @Test(groups = {"update"})
     public void updateTableDesc() {
         TrelloAnswers result = getTrelloAnswer(requestBuilder()
-            .setId(ParametrExamples.ID)
-            .setDescription(ParametrExamples.DESCRIPTION_EXAMPLE)
+            .setId(boardId)
+            .setDescription(DESCRIPTION_EXAMPLE)
             .setMethod(Method.PUT)
             .buildRequest()
             .sendRequest());
-        assertThat("Api update table description with id: " + ParametrExamples.ID, result,
-            hasProperty(ParametersName.DESCRIPTION, is(ParametrExamples.DESCRIPTION_EXAMPLE)));
+        assertThat("Api update table description with id: " + boardId, result,
+            hasProperty(ParametersName.DESCRIPTION, is(DESCRIPTION_EXAMPLE)));
     }
 
-    @Test
+    @Test(groups = {"update"})
     public void updateTableBackground() {
         TrelloAnswers result = getTrelloAnswer(requestBuilder()
-            .setId(ParametrExamples.ID)
-            .updateBackground(ParametrExamples.PREFS_BACKGROUND_EXAMPLE)
+            .setId(boardId)
+            .updateBackground(PREFS_BACKGROUND_EXAMPLE)
             .setMethod(Method.PUT)
             .buildRequest()
             .sendRequest());
-        assertThat("Api update table background with id: " + ParametrExamples.ID, result.getPrefs(),
-            hasProperty(ParametersName.BACKGROUND, is(ParametrExamples.PREFS_BACKGROUND_EXAMPLE)));
+        assertThat("Api update table background with id: " + boardId, result.getPrefs(),
+            hasProperty(ParametersName.BACKGROUND, is(PREFS_BACKGROUND_EXAMPLE)));
     }
 
-    @Test
+    @Test(groups = {"update"})
     public void updateLabelNamesGreen() {
         TrelloAnswers result = getTrelloAnswer(requestBuilder()
-            .setId(ParametrExamples.ID)
-            .updateLabelNamesGreen(ParametrExamples.GREEN_NAME_EXAMPLE)
+            .setId(boardId)
+            .updateLabelNamesGreen(GREEN_NAME_EXAMPLE)
             .setMethod(Method.PUT)
             .buildRequest()
             .sendRequest());
-        assertThat("Api update table label name green with id: " + ParametrExamples.ID, result.getLabelNames(),
-            hasProperty(ParametersName.GREEN, is(ParametrExamples.GREEN_NAME_EXAMPLE)));
+        assertThat("Api update table label name green with id: " + boardId, result.getLabelNames(),
+            hasProperty(ParametersName.GREEN, is(GREEN_NAME_EXAMPLE)));
     }
 
-    @Test
+    @Test(groups = {"update"})
     public void updateLabelNamesYellow() {
         TrelloAnswers result = getTrelloAnswer(requestBuilder()
-            .setId(ParametrExamples.ID)
-            .updateLabelNamesYellow(ParametrExamples.YELLOW_NAME_EXAMPLE)
+            .setId(boardId)
+            .updateLabelNamesYellow(YELLOW_NAME_EXAMPLE)
             .setMethod(Method.PUT)
             .buildRequest()
             .sendRequest());
-        assertThat("Api update table label name yellow with id: " + ParametrExamples.ID, result.getLabelNames(),
-            hasProperty(ParametersName.YELLOW, is(ParametrExamples.YELLOW_NAME_EXAMPLE)));
+        assertThat("Api update table label name yellow with id: " + boardId, result.getLabelNames(),
+            hasProperty(ParametersName.YELLOW, is(YELLOW_NAME_EXAMPLE)));
     }
 
-    @AfterClass(alwaysRun = true)
-    public void deleteTableForUpdate() {
+    @AfterMethod(onlyForGroups = {"create", "update", "get"})
+    public void tearDownTests() {
         requestBuilder()
-            .setId(ParametrExamples.ID)
+            .setId(boardId)
             .setMethod(Method.DELETE)
             .buildRequest()
             .sendRequest();
-
-        ParametrExamples.ID = "";
-
     }
 }

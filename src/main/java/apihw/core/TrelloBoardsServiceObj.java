@@ -1,18 +1,19 @@
-package ru.training.at.hw8api.main.core;
+package apihw.core;
 
+import static apihw.constants.ParametersName.DESCRIPTION;
+import static apihw.constants.ParametersName.KEY;
+import static apihw.constants.ParametersName.LABELNAMES_GREEN;
+import static apihw.constants.ParametersName.LABELNAMES_YELLOW;
+import static apihw.constants.ParametersName.NAME;
+import static apihw.constants.ParametersName.PREFS_BACKGROUND;
+import static apihw.constants.ParametersName.PREFS_BACKGROUND_UPD;
+import static apihw.constants.ParametersName.TOKEN;
+import static apihw.constants.RequiredParameters.API_KEY;
+import static apihw.constants.RequiredParameters.API_TOKEN;
+import static apihw.constants.RequiredParameters.BASE_URL;
 import static org.hamcrest.Matchers.lessThan;
-import static ru.training.at.hw8api.main.constants.ParametersName.DESCRIPTION;
-import static ru.training.at.hw8api.main.constants.ParametersName.KEY;
-import static ru.training.at.hw8api.main.constants.ParametersName.LABELNAMES_GREEN;
-import static ru.training.at.hw8api.main.constants.ParametersName.LABELNAMES_YELLOW;
-import static ru.training.at.hw8api.main.constants.ParametersName.NAME;
-import static ru.training.at.hw8api.main.constants.ParametersName.PREFS_BACKGROUND;
-import static ru.training.at.hw8api.main.constants.ParametersName.PREFS_BACKGROUND_UPD;
-import static ru.training.at.hw8api.main.constants.ParametersName.TOKEN;
-import static ru.training.at.hw8api.main.constants.RequiredParameters.API_KEY;
-import static ru.training.at.hw8api.main.constants.RequiredParameters.API_TOKEN;
-import static ru.training.at.hw8api.main.constants.RequiredParameters.BASE_URL;
 
+import apihw.beans.TrelloAnswers;
 import com.google.gson.Gson;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
@@ -26,14 +27,17 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.http.HttpStatus;
-import ru.training.at.hw8api.main.beans.TrelloAnswers;
 
 public class TrelloBoardsServiceObj {
-    public static URI TRELLO_BOARDS_URI = URI.create(BASE_URL + "boards/");
+    public static URI trelloBoardUri = URI.create(BASE_URL + "boards/");
+    public static final URI baseTrelloBoardUri = URI.create(BASE_URL + "boards/");
     private static long requestNumber = 0L;
 
     private Map<String, String> parameters;
     private Method requestMethod;
+
+    public TrelloBoardsServiceObj() {
+    }
 
     private TrelloBoardsServiceObj(Map<String, String> parameters, Method method) {
         this.parameters = parameters;
@@ -53,16 +57,6 @@ public class TrelloBoardsServiceObj {
             return this;
         }
 
-        public ApiRequestBuilder setToken() {
-            parametrs.put("token", API_TOKEN);
-            return this;
-        }
-
-        public ApiRequestBuilder setKey() {
-            parametrs.put("key", API_KEY);
-            return this;
-        }
-
         public ApiRequestBuilder setName(String name) {
             parametrs.put(NAME, name);
             return this;
@@ -79,7 +73,7 @@ public class TrelloBoardsServiceObj {
         }
 
         public ApiRequestBuilder setId(String id) {
-            TRELLO_BOARDS_URI = URI.create(BASE_URL + "boards/" + id);
+            trelloBoardUri = URI.create(BASE_URL + "boards/" + id);
             return this;
         }
 
@@ -98,6 +92,10 @@ public class TrelloBoardsServiceObj {
             return this;
         }
 
+        public URI getTrelloURI() {
+            return URI.create(BASE_URL + "boards/");
+        }
+
         public TrelloBoardsServiceObj buildRequest() {
             return new TrelloBoardsServiceObj(parametrs, requestMethod);
         }
@@ -109,7 +107,6 @@ public class TrelloBoardsServiceObj {
             .addQueryParam(KEY, API_KEY)
             .addQueryParam(TOKEN, API_TOKEN)
             .addQueryParam("requestNumber", ++requestNumber)
-            .setBaseUri(TRELLO_BOARDS_URI)
             .build();
     }
 
@@ -117,7 +114,15 @@ public class TrelloBoardsServiceObj {
         return RestAssured
             .given(requestSpecification()).log().all()
             .queryParams(parameters)
-            .request(requestMethod, TRELLO_BOARDS_URI)
+            .request(requestMethod, trelloBoardUri)
+            .prettyPeek();
+    }
+
+    public Response sendRequestForCreate() {
+        return RestAssured
+            .given(requestSpecification()).log().all()
+            .queryParams(parameters)
+            .request(requestMethod, baseTrelloBoardUri)
             .prettyPeek();
     }
 

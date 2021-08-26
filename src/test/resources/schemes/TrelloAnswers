@@ -37,15 +37,6 @@
     "pink": "REST API",
     "black": "Capabilties"
   },
-  "limits": {
-    "attachments": {
-      "perBoard": {
-        "status": "ok",
-        "disableAt": 36000,
-        "warnAt": 32400
-      }
-    }
-  },
   "starred": true,
   "memberships": "<string>",
   "shortLink": "<string>",

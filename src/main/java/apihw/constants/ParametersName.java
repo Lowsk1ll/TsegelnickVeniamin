@@ -1,4 +1,4 @@
-package ru.training.at.hw8api.main.constants;
+package apihw.constants;
 
 public class ParametersName {
     public static final String NAME = "name";

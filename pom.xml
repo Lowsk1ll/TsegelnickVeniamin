@@ -100,6 +100,12 @@
       <artifactId>hamcrest-core</artifactId>
       <version>2.2</version>
     </dependency>
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>7.4.0</version>
+      <scope>compile</scope>
+    </dependency>
 
   </dependencies>
 
@@ -181,26 +187,26 @@
           <reportVersion>${allure.version}</reportVersion>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.jsonschema2pojo</groupId>
-        <artifactId>jsonschema2pojo-maven-plugin</artifactId>
-        <version>1.0.2</version>
-        <configuration>
-          <sourceDirectory>${basedir}/src/test/resources/schemes</sourceDirectory>
-          <outputDirectory>${basedir}/src/test/java/ru/training/at/hw8api/main</outputDirectory>
-          <targetPackage>beans</targetPackage>
-          <addCompileSourceRoot>true</addCompileSourceRoot>
-          <sourceType>json</sourceType>
-          <annotationStyle>gson</annotationStyle>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.jsonschema2pojo</groupId>-->
+<!--        <artifactId>jsonschema2pojo-maven-plugin</artifactId>-->
+<!--        <version>1.0.2</version>-->
+<!--        <configuration>-->
+<!--          <sourceDirectory>${basedir}/src/test/resources/schemes</sourceDirectory>-->
+<!--          <outputDirectory>${basedir}/src/main/java</outputDirectory>-->
+<!--          <targetPackage>beans</targetPackage>-->
+<!--          <addCompileSourceRoot>true</addCompileSourceRoot>-->
+<!--          <sourceType>json</sourceType>-->
+<!--          <annotationStyle>gson</annotationStyle>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <goals>-->
+<!--              <goal>generate</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
     </plugins>
     <resources>
       <resource>
