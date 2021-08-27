@@ -16,8 +16,8 @@ public class RequiredParameters {
             locator.close();
         } catch (IOException e) {
             try {
-                throw new IOException("Wrong filename");
-            } catch (IOException ioException) {
+                throw new Exception("Wrong filename");
+            } catch (Exception ioException) {
                 System.exit(1);
             }
         }
