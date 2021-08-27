@@ -1,6 +1,7 @@
 package apihw.constants;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -10,15 +11,16 @@ public class RequiredParameters {
     static {
         try {
             properties = new Properties();
-            properties.load(new FileInputStream("src/test/resources/test.properties"));
+            FileInputStream locator = new FileInputStream("src/test/resources/testapi.properties");
+            properties.load(locator);
+            locator.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
+            System.err.println("Wrong filename");
         }
         API_KEY = properties.getProperty("key");
         API_TOKEN = properties.getProperty("token");
-
     }
-
 
     public static final String BASE_URL = "https://api.trello.com/1/";
     public static final String API_KEY;

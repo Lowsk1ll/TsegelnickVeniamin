@@ -142,58 +142,57 @@ public class Prefs {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(Prefs.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
-          .append('[');
+        sb.append(Prefs.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("permissionLevel");
         sb.append('=');
-        sb.append(((this.permissionLevel == null) ? "<null>" : this.permissionLevel));
+        sb.append(((this.permissionLevel == null)?"<null>":this.permissionLevel));
         sb.append(',');
         sb.append("hideVotes");
         sb.append('=');
-        sb.append(((this.hideVotes == null) ? "<null>" : this.hideVotes));
+        sb.append(((this.hideVotes == null)?"<null>":this.hideVotes));
         sb.append(',');
         sb.append("voting");
         sb.append('=');
-        sb.append(((this.voting == null) ? "<null>" : this.voting));
+        sb.append(((this.voting == null)?"<null>":this.voting));
         sb.append(',');
         sb.append("comments");
         sb.append('=');
-        sb.append(((this.comments == null) ? "<null>" : this.comments));
+        sb.append(((this.comments == null)?"<null>":this.comments));
         sb.append(',');
         sb.append("selfJoin");
         sb.append('=');
-        sb.append(((this.selfJoin == null) ? "<null>" : this.selfJoin));
+        sb.append(((this.selfJoin == null)?"<null>":this.selfJoin));
         sb.append(',');
         sb.append("cardCovers");
         sb.append('=');
-        sb.append(((this.cardCovers == null) ? "<null>" : this.cardCovers));
+        sb.append(((this.cardCovers == null)?"<null>":this.cardCovers));
         sb.append(',');
         sb.append("isTemplate");
         sb.append('=');
-        sb.append(((this.isTemplate == null) ? "<null>" : this.isTemplate));
+        sb.append(((this.isTemplate == null)?"<null>":this.isTemplate));
         sb.append(',');
         sb.append("cardAging");
         sb.append('=');
-        sb.append(((this.cardAging == null) ? "<null>" : this.cardAging));
+        sb.append(((this.cardAging == null)?"<null>":this.cardAging));
         sb.append(',');
         sb.append("calendarFeedEnabled");
         sb.append('=');
-        sb.append(((this.calendarFeedEnabled == null) ? "<null>" : this.calendarFeedEnabled));
+        sb.append(((this.calendarFeedEnabled == null)?"<null>":this.calendarFeedEnabled));
         sb.append(',');
         sb.append("background");
         sb.append('=');
-        sb.append(((this.background == null) ? "<null>" : this.background));
+        sb.append(((this.background == null)?"<null>":this.background));
         sb.append(',');
         sb.append("backgroundImage");
         sb.append('=');
-        sb.append(((this.backgroundImage == null) ? "<null>" : this.backgroundImage));
+        sb.append(((this.backgroundImage == null)?"<null>":this.backgroundImage));
         sb.append(',');
         sb.append("backgroundImageScaled");
         sb.append('=');
-        sb.append(((this.backgroundImageScaled == null) ? "<null>" : this.backgroundImageScaled));
+        sb.append(((this.backgroundImageScaled == null)?"<null>":this.backgroundImageScaled));
         sb.append(',');
-        if (sb.charAt((sb.length() - 1)) == ',') {
-            sb.setCharAt((sb.length() - 1), ']');
+        if (sb.charAt((sb.length()- 1)) == ',') {
+            sb.setCharAt((sb.length()- 1), ']');
         } else {
             sb.append(']');
         }
@@ -203,18 +202,18 @@ public class Prefs {
     @Override
     public int hashCode() {
         int result = 1;
-        result = ((result * 31) + ((this.comments == null) ? 0 : this.comments.hashCode()));
-        result = ((result * 31) + ((this.hideVotes == null) ? 0 : this.hideVotes.hashCode()));
-        result = ((result * 31) + ((this.backgroundImage == null) ? 0 : this.backgroundImage.hashCode()));
-        result = ((result * 31) + ((this.voting == null) ? 0 : this.voting.hashCode()));
-        result = ((result * 31) + ((this.calendarFeedEnabled == null) ? 0 : this.calendarFeedEnabled.hashCode()));
-        result = ((result * 31) + ((this.backgroundImageScaled == null) ? 0 : this.backgroundImageScaled.hashCode()));
-        result = ((result * 31) + ((this.permissionLevel == null) ? 0 : this.permissionLevel.hashCode()));
-        result = ((result * 31) + ((this.cardAging == null) ? 0 : this.cardAging.hashCode()));
-        result = ((result * 31) + ((this.isTemplate == null) ? 0 : this.isTemplate.hashCode()));
-        result = ((result * 31) + ((this.background == null) ? 0 : this.background.hashCode()));
-        result = ((result * 31) + ((this.cardCovers == null) ? 0 : this.cardCovers.hashCode()));
-        result = ((result * 31) + ((this.selfJoin == null) ? 0 : this.selfJoin.hashCode()));
+        result = ((result* 31)+((this.comments == null)? 0 :this.comments.hashCode()));
+        result = ((result* 31)+((this.hideVotes == null)? 0 :this.hideVotes.hashCode()));
+        result = ((result* 31)+((this.backgroundImage == null)? 0 :this.backgroundImage.hashCode()));
+        result = ((result* 31)+((this.voting == null)? 0 :this.voting.hashCode()));
+        result = ((result* 31)+((this.calendarFeedEnabled == null)? 0 :this.calendarFeedEnabled.hashCode()));
+        result = ((result* 31)+((this.backgroundImageScaled == null)? 0 :this.backgroundImageScaled.hashCode()));
+        result = ((result* 31)+((this.permissionLevel == null)? 0 :this.permissionLevel.hashCode()));
+        result = ((result* 31)+((this.cardAging == null)? 0 :this.cardAging.hashCode()));
+        result = ((result* 31)+((this.isTemplate == null)? 0 :this.isTemplate.hashCode()));
+        result = ((result* 31)+((this.background == null)? 0 :this.background.hashCode()));
+        result = ((result* 31)+((this.cardCovers == null)? 0 :this.cardCovers.hashCode()));
+        result = ((result* 31)+((this.selfJoin == null)? 0 :this.selfJoin.hashCode()));
         return result;
     }
 
@@ -227,23 +226,7 @@ public class Prefs {
             return false;
         }
         Prefs rhs = ((Prefs) other);
-        return ((((((
-            (((((((this.comments == rhs.comments) || ((this.comments != null) && this.comments.equals(rhs.comments)))
-                && ((this.hideVotes == rhs.hideVotes) || ((this.hideVotes != null) && this.hideVotes
-                .equals(rhs.hideVotes)))) && ((this.backgroundImage == rhs.backgroundImage) || (
-                (this.backgroundImage != null) && this.backgroundImage.equals(rhs.backgroundImage)))) && (
-                (this.voting == rhs.voting) || ((this.voting != null) && this.voting.equals(rhs.voting)))) && (
-                (this.calendarFeedEnabled == rhs.calendarFeedEnabled) || ((this.calendarFeedEnabled != null)
-                    && this.calendarFeedEnabled.equals(rhs.calendarFeedEnabled)))) && (
-                (this.backgroundImageScaled == rhs.backgroundImageScaled) || ((this.backgroundImageScaled != null)
-                    && this.backgroundImageScaled.equals(rhs.backgroundImageScaled)))) && (
-                (this.permissionLevel == rhs.permissionLevel) || ((this.permissionLevel != null) && this.permissionLevel
-                    .equals(rhs.permissionLevel)))) && ((this.cardAging == rhs.cardAging) || ((this.cardAging != null)
-            && this.cardAging.equals(rhs.cardAging)))) && ((this.isTemplate == rhs.isTemplate) || (
-            (this.isTemplate != null) && this.isTemplate.equals(rhs.isTemplate)))) && (
-            (this.background == rhs.background) || ((this.background != null) && this.background
-                .equals(rhs.background)))) && ((this.cardCovers == rhs.cardCovers) || ((this.cardCovers != null)
-            && this.cardCovers.equals(rhs.cardCovers)))) && ((this.selfJoin == rhs.selfJoin) || ((this.selfJoin != null)
-            && this.selfJoin.equals(rhs.selfJoin))));
+        return (((((((((((((this.comments == rhs.comments)||((this.comments!= null)&&this.comments.equals(rhs.comments)))&&((this.hideVotes == rhs.hideVotes)||((this.hideVotes!= null)&&this.hideVotes.equals(rhs.hideVotes))))&&((this.backgroundImage == rhs.backgroundImage)||((this.backgroundImage!= null)&&this.backgroundImage.equals(rhs.backgroundImage))))&&((this.voting == rhs.voting)||((this.voting!= null)&&this.voting.equals(rhs.voting))))&&((this.calendarFeedEnabled == rhs.calendarFeedEnabled)||((this.calendarFeedEnabled!= null)&&this.calendarFeedEnabled.equals(rhs.calendarFeedEnabled))))&&((this.backgroundImageScaled == rhs.backgroundImageScaled)||((this.backgroundImageScaled!= null)&&this.backgroundImageScaled.equals(rhs.backgroundImageScaled))))&&((this.permissionLevel == rhs.permissionLevel)||((this.permissionLevel!= null)&&this.permissionLevel.equals(rhs.permissionLevel))))&&((this.cardAging == rhs.cardAging)||((this.cardAging!= null)&&this.cardAging.equals(rhs.cardAging))))&&((this.isTemplate == rhs.isTemplate)||((this.isTemplate!= null)&&this.isTemplate.equals(rhs.isTemplate))))&&((this.background == rhs.background)||((this.background!= null)&&this.background.equals(rhs.background))))&&((this.cardCovers == rhs.cardCovers)||((this.cardCovers!= null)&&this.cardCovers.equals(rhs.cardCovers))))&&((this.selfJoin == rhs.selfJoin)||((this.selfJoin!= null)&&this.selfJoin.equals(rhs.selfJoin))));
     }
+
 }

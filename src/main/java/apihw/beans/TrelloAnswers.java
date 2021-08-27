@@ -15,9 +15,6 @@ public class TrelloAnswers {
     @SerializedName("desc")
     @Expose
     private String desc;
-    @SerializedName("descData")
-    @Expose
-    private DescData descData;
     @SerializedName("closed")
     @Expose
     private Boolean closed;
@@ -104,14 +101,6 @@ public class TrelloAnswers {
 
     public void setDesc(String desc) {
         this.desc = desc;
-    }
-
-    public DescData getDescData() {
-        return descData;
-    }
-
-    public void setDescData(DescData descData) {
-        this.descData = descData;
     }
 
     public Boolean getClosed() {
@@ -285,110 +274,105 @@ public class TrelloAnswers {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(TrelloAnswers.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this)))
-          .append('[');
+        sb.append(TrelloAnswers.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
         sb.append("id");
         sb.append('=');
-        sb.append(((this.id == null) ? "<null>" : this.id));
+        sb.append(((this.id == null)?"<null>":this.id));
         sb.append(',');
         sb.append("name");
         sb.append('=');
-        sb.append(((this.name == null) ? "<null>" : this.name));
+        sb.append(((this.name == null)?"<null>":this.name));
         sb.append(',');
         sb.append("desc");
         sb.append('=');
-        sb.append(((this.desc == null) ? "<null>" : this.desc));
-        sb.append(',');
-        sb.append("descData");
-        sb.append('=');
-        sb.append(((this.descData == null) ? "<null>" : this.descData));
+        sb.append(((this.desc == null)?"<null>":this.desc));
         sb.append(',');
         sb.append("closed");
         sb.append('=');
-        sb.append(((this.closed == null) ? "<null>" : this.closed));
+        sb.append(((this.closed == null)?"<null>":this.closed));
         sb.append(',');
         sb.append("idMemberCreator");
         sb.append('=');
-        sb.append(((this.idMemberCreator == null) ? "<null>" : this.idMemberCreator));
+        sb.append(((this.idMemberCreator == null)?"<null>":this.idMemberCreator));
         sb.append(',');
         sb.append("idOrganization");
         sb.append('=');
-        sb.append(((this.idOrganization == null) ? "<null>" : this.idOrganization));
+        sb.append(((this.idOrganization == null)?"<null>":this.idOrganization));
         sb.append(',');
         sb.append("pinned");
         sb.append('=');
-        sb.append(((this.pinned == null) ? "<null>" : this.pinned));
+        sb.append(((this.pinned == null)?"<null>":this.pinned));
         sb.append(',');
         sb.append("url");
         sb.append('=');
-        sb.append(((this.url == null) ? "<null>" : this.url));
+        sb.append(((this.url == null)?"<null>":this.url));
         sb.append(',');
         sb.append("shortUrl");
         sb.append('=');
-        sb.append(((this.shortUrl == null) ? "<null>" : this.shortUrl));
+        sb.append(((this.shortUrl == null)?"<null>":this.shortUrl));
         sb.append(',');
         sb.append("prefs");
         sb.append('=');
-        sb.append(((this.prefs == null) ? "<null>" : this.prefs));
+        sb.append(((this.prefs == null)?"<null>":this.prefs));
         sb.append(',');
         sb.append("labelNames");
         sb.append('=');
-        sb.append(((this.labelNames == null) ? "<null>" : this.labelNames));
+        sb.append(((this.labelNames == null)?"<null>":this.labelNames));
         sb.append(',');
         sb.append("starred");
         sb.append('=');
-        sb.append(((this.starred == null) ? "<null>" : this.starred));
+        sb.append(((this.starred == null)?"<null>":this.starred));
         sb.append(',');
         sb.append("memberships");
         sb.append('=');
-        sb.append(((this.memberships == null) ? "<null>" : this.memberships));
+        sb.append(((this.memberships == null)?"<null>":this.memberships));
         sb.append(',');
         sb.append("shortLink");
         sb.append('=');
-        sb.append(((this.shortLink == null) ? "<null>" : this.shortLink));
+        sb.append(((this.shortLink == null)?"<null>":this.shortLink));
         sb.append(',');
         sb.append("subscribed");
         sb.append('=');
-        sb.append(((this.subscribed == null) ? "<null>" : this.subscribed));
+        sb.append(((this.subscribed == null)?"<null>":this.subscribed));
         sb.append(',');
         sb.append("powerUps");
         sb.append('=');
-        sb.append(((this.powerUps == null) ? "<null>" : this.powerUps));
+        sb.append(((this.powerUps == null)?"<null>":this.powerUps));
         sb.append(',');
         sb.append("dateLastActivity");
         sb.append('=');
-        sb.append(((this.dateLastActivity == null) ? "<null>" : this.dateLastActivity));
+        sb.append(((this.dateLastActivity == null)?"<null>":this.dateLastActivity));
         sb.append(',');
         sb.append("dateLastView");
         sb.append('=');
-        sb.append(((this.dateLastView == null) ? "<null>" : this.dateLastView));
+        sb.append(((this.dateLastView == null)?"<null>":this.dateLastView));
         sb.append(',');
         sb.append("idTags");
         sb.append('=');
-        sb.append(((this.idTags == null) ? "<null>" : this.idTags));
+        sb.append(((this.idTags == null)?"<null>":this.idTags));
         sb.append(',');
         sb.append("datePluginDisable");
         sb.append('=');
-        sb.append(((this.datePluginDisable == null) ? "<null>" : this.datePluginDisable));
+        sb.append(((this.datePluginDisable == null)?"<null>":this.datePluginDisable));
         sb.append(',');
         sb.append("creationMethod");
         sb.append('=');
-        sb.append(((this.creationMethod == null) ? "<null>" : this.creationMethod));
+        sb.append(((this.creationMethod == null)?"<null>":this.creationMethod));
         sb.append(',');
         sb.append("ixUpdate");
         sb.append('=');
-        sb.append(((this.ixUpdate == null) ? "<null>" : this.ixUpdate));
+        sb.append(((this.ixUpdate == null)?"<null>":this.ixUpdate));
         sb.append(',');
         sb.append("templateGallery");
         sb.append('=');
-        sb.append(((this.templateGallery == null) ? "<null>" : this.templateGallery));
+        sb.append(((this.templateGallery == null)?"<null>":this.templateGallery));
         sb.append(',');
         sb.append("enterpriseOwned");
         sb.append('=');
-        sb.append(((this.enterpriseOwned == null) ? "<null>" : this.enterpriseOwned));
+        sb.append(((this.enterpriseOwned == null)?"<null>":this.enterpriseOwned));
         sb.append(',');
-        if (sb.charAt((sb.length() - 1)) == ',') {
-            sb.setCharAt((sb.length() - 1), ']');
+        if (sb.charAt((sb.length()- 1)) == ',') {
+            sb.setCharAt((sb.length()- 1), ']');
         } else {
             sb.append(']');
         }
@@ -398,31 +382,30 @@ public class TrelloAnswers {
     @Override
     public int hashCode() {
         int result = 1;
-        result = ((result * 31) + ((this.descData == null) ? 0 : this.descData.hashCode()));
-        result = ((result * 31) + ((this.idTags == null) ? 0 : this.idTags.hashCode()));
-        result = ((result * 31) + ((this.pinned == null) ? 0 : this.pinned.hashCode()));
-        result = ((result * 31) + ((this.labelNames == null) ? 0 : this.labelNames.hashCode()));
-        result = ((result * 31) + ((this.shortUrl == null) ? 0 : this.shortUrl.hashCode()));
-        result = ((result * 31) + ((this.dateLastActivity == null) ? 0 : this.dateLastActivity.hashCode()));
-        result = ((result * 31) + ((this.datePluginDisable == null) ? 0 : this.datePluginDisable.hashCode()));
-        result = ((result * 31) + ((this.shortLink == null) ? 0 : this.shortLink.hashCode()));
-        result = ((result * 31) + ((this.memberships == null) ? 0 : this.memberships.hashCode()));
-        result = ((result * 31) + ((this.creationMethod == null) ? 0 : this.creationMethod.hashCode()));
-        result = ((result * 31) + ((this.subscribed == null) ? 0 : this.subscribed.hashCode()));
-        result = ((result * 31) + ((this.starred == null) ? 0 : this.starred.hashCode()));
-        result = ((result * 31) + ((this.idOrganization == null) ? 0 : this.idOrganization.hashCode()));
-        result = ((result * 31) + ((this.dateLastView == null) ? 0 : this.dateLastView.hashCode()));
-        result = ((result * 31) + ((this.id == null) ? 0 : this.id.hashCode()));
-        result = ((result * 31) + ((this.powerUps == null) ? 0 : this.powerUps.hashCode()));
-        result = ((result * 31) + ((this.templateGallery == null) ? 0 : this.templateGallery.hashCode()));
-        result = ((result * 31) + ((this.url == null) ? 0 : this.url.hashCode()));
-        result = ((result * 31) + ((this.prefs == null) ? 0 : this.prefs.hashCode()));
-        result = ((result * 31) + ((this.enterpriseOwned == null) ? 0 : this.enterpriseOwned.hashCode()));
-        result = ((result * 31) + ((this.ixUpdate == null) ? 0 : this.ixUpdate.hashCode()));
-        result = ((result * 31) + ((this.name == null) ? 0 : this.name.hashCode()));
-        result = ((result * 31) + ((this.closed == null) ? 0 : this.closed.hashCode()));
-        result = ((result * 31) + ((this.idMemberCreator == null) ? 0 : this.idMemberCreator.hashCode()));
-        result = ((result * 31) + ((this.desc == null) ? 0 : this.desc.hashCode()));
+        result = ((result* 31)+((this.idTags == null)? 0 :this.idTags.hashCode()));
+        result = ((result* 31)+((this.pinned == null)? 0 :this.pinned.hashCode()));
+        result = ((result* 31)+((this.labelNames == null)? 0 :this.labelNames.hashCode()));
+        result = ((result* 31)+((this.shortUrl == null)? 0 :this.shortUrl.hashCode()));
+        result = ((result* 31)+((this.dateLastActivity == null)? 0 :this.dateLastActivity.hashCode()));
+        result = ((result* 31)+((this.datePluginDisable == null)? 0 :this.datePluginDisable.hashCode()));
+        result = ((result* 31)+((this.shortLink == null)? 0 :this.shortLink.hashCode()));
+        result = ((result* 31)+((this.memberships == null)? 0 :this.memberships.hashCode()));
+        result = ((result* 31)+((this.creationMethod == null)? 0 :this.creationMethod.hashCode()));
+        result = ((result* 31)+((this.subscribed == null)? 0 :this.subscribed.hashCode()));
+        result = ((result* 31)+((this.starred == null)? 0 :this.starred.hashCode()));
+        result = ((result* 31)+((this.idOrganization == null)? 0 :this.idOrganization.hashCode()));
+        result = ((result* 31)+((this.dateLastView == null)? 0 :this.dateLastView.hashCode()));
+        result = ((result* 31)+((this.id == null)? 0 :this.id.hashCode()));
+        result = ((result* 31)+((this.powerUps == null)? 0 :this.powerUps.hashCode()));
+        result = ((result* 31)+((this.templateGallery == null)? 0 :this.templateGallery.hashCode()));
+        result = ((result* 31)+((this.url == null)? 0 :this.url.hashCode()));
+        result = ((result* 31)+((this.prefs == null)? 0 :this.prefs.hashCode()));
+        result = ((result* 31)+((this.enterpriseOwned == null)? 0 :this.enterpriseOwned.hashCode()));
+        result = ((result* 31)+((this.ixUpdate == null)? 0 :this.ixUpdate.hashCode()));
+        result = ((result* 31)+((this.name == null)? 0 :this.name.hashCode()));
+        result = ((result* 31)+((this.closed == null)? 0 :this.closed.hashCode()));
+        result = ((result* 31)+((this.idMemberCreator == null)? 0 :this.idMemberCreator.hashCode()));
+        result = ((result* 31)+((this.desc == null)? 0 :this.desc.hashCode()));
         return result;
     }
 
@@ -435,36 +418,7 @@ public class TrelloAnswers {
             return false;
         }
         TrelloAnswers rhs = ((TrelloAnswers) other);
-        return (((((((((((((((((((((
-            (((((this.descData == rhs.descData) || ((this.descData != null) && this.descData.equals(rhs.descData))) && (
-                (this.idTags == rhs.idTags) || ((this.idTags != null) && this.idTags.equals(rhs.idTags)))) && (
-                (this.pinned == rhs.pinned) || ((this.pinned != null) && this.pinned.equals(rhs.pinned)))) && (
-                (this.labelNames == rhs.labelNames) || ((this.labelNames != null) && this.labelNames
-                    .equals(rhs.labelNames)))) && ((this.shortUrl == rhs.shortUrl) || ((this.shortUrl != null)
-                && this.shortUrl.equals(rhs.shortUrl)))) && ((this.dateLastActivity == rhs.dateLastActivity) || (
-            (this.dateLastActivity != null) && this.dateLastActivity.equals(rhs.dateLastActivity)))) && (
-            (this.datePluginDisable == rhs.datePluginDisable) || ((this.datePluginDisable != null)
-                && this.datePluginDisable.equals(rhs.datePluginDisable)))) && ((this.shortLink == rhs.shortLink) || (
-            (this.shortLink != null) && this.shortLink.equals(rhs.shortLink)))) && (
-            (this.memberships == rhs.memberships) || ((this.memberships != null) && this.memberships
-                .equals(rhs.memberships)))) && ((this.creationMethod == rhs.creationMethod) || (
-            (this.creationMethod != null) && this.creationMethod.equals(rhs.creationMethod)))) && (
-            (this.subscribed == rhs.subscribed) || ((this.subscribed != null) && this.subscribed
-                .equals(rhs.subscribed)))) && ((this.starred == rhs.starred) || ((this.starred != null) && this.starred
-            .equals(rhs.starred)))) && ((this.idOrganization == rhs.idOrganization) || ((this.idOrganization != null)
-            && this.idOrganization.equals(rhs.idOrganization)))) && ((this.dateLastView == rhs.dateLastView) || (
-            (this.dateLastView != null) && this.dateLastView.equals(rhs.dateLastView)))) && ((this.id == rhs.id) || (
-            (this.id != null) && this.id.equals(rhs.id)))) && ((this.powerUps == rhs.powerUps) || (
-            (this.powerUps != null) && this.powerUps.equals(rhs.powerUps)))) && (
-            (this.templateGallery == rhs.templateGallery) || ((this.templateGallery != null) && this.templateGallery
-                .equals(rhs.templateGallery)))) && ((this.url == rhs.url) || ((this.url != null) && this.url
-            .equals(rhs.url)))) && ((this.prefs == rhs.prefs) || ((this.prefs != null) && this.prefs
-            .equals(rhs.prefs)))) && ((this.enterpriseOwned == rhs.enterpriseOwned) || ((this.enterpriseOwned != null)
-            && this.enterpriseOwned.equals(rhs.enterpriseOwned)))) && ((this.ixUpdate == rhs.ixUpdate) || (
-            (this.ixUpdate != null) && this.ixUpdate.equals(rhs.ixUpdate)))) && ((this.name == rhs.name) || (
-            (this.name != null) && this.name.equals(rhs.name)))) && ((this.closed == rhs.closed) || (
-            (this.closed != null) && this.closed.equals(rhs.closed)))) && ((this.idMemberCreator == rhs.idMemberCreator)
-            || ((this.idMemberCreator != null) && this.idMemberCreator.equals(rhs.idMemberCreator)))) && (
-            (this.desc == rhs.desc) || ((this.desc != null) && this.desc.equals(rhs.desc))));
+        return (((((((((((((((((((((((((this.idTags == rhs.idTags)||((this.idTags!= null)&&this.idTags.equals(rhs.idTags)))&&((this.pinned == rhs.pinned)||((this.pinned!= null)&&this.pinned.equals(rhs.pinned))))&&((this.labelNames == rhs.labelNames)||((this.labelNames!= null)&&this.labelNames.equals(rhs.labelNames))))&&((this.shortUrl == rhs.shortUrl)||((this.shortUrl!= null)&&this.shortUrl.equals(rhs.shortUrl))))&&((this.dateLastActivity == rhs.dateLastActivity)||((this.dateLastActivity!= null)&&this.dateLastActivity.equals(rhs.dateLastActivity))))&&((this.datePluginDisable == rhs.datePluginDisable)||((this.datePluginDisable!= null)&&this.datePluginDisable.equals(rhs.datePluginDisable))))&&((this.shortLink == rhs.shortLink)||((this.shortLink!= null)&&this.shortLink.equals(rhs.shortLink))))&&((this.memberships == rhs.memberships)||((this.memberships!= null)&&this.memberships.equals(rhs.memberships))))&&((this.creationMethod == rhs.creationMethod)||((this.creationMethod!= null)&&this.creationMethod.equals(rhs.creationMethod))))&&((this.subscribed == rhs.subscribed)||((this.subscribed!= null)&&this.subscribed.equals(rhs.subscribed))))&&((this.starred == rhs.starred)||((this.starred!= null)&&this.starred.equals(rhs.starred))))&&((this.idOrganization == rhs.idOrganization)||((this.idOrganization!= null)&&this.idOrganization.equals(rhs.idOrganization))))&&((this.dateLastView == rhs.dateLastView)||((this.dateLastView!= null)&&this.dateLastView.equals(rhs.dateLastView))))&&((this.id == rhs.id)||((this.id!= null)&&this.id.equals(rhs.id))))&&((this.powerUps == rhs.powerUps)||((this.powerUps!= null)&&this.powerUps.equals(rhs.powerUps))))&&((this.templateGallery == rhs.templateGallery)||((this.templateGallery!= null)&&this.templateGallery.equals(rhs.templateGallery))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))))&&((this.prefs == rhs.prefs)||((this.prefs!= null)&&this.prefs.equals(rhs.prefs))))&&((this.enterpriseOwned == rhs.enterpriseOwned)||((this.enterpriseOwned!= null)&&this.enterpriseOwned.equals(rhs.enterpriseOwned))))&&((this.ixUpdate == rhs.ixUpdate)||((this.ixUpdate!= null)&&this.ixUpdate.equals(rhs.ixUpdate))))&&((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name))))&&((this.closed == rhs.closed)||((this.closed!= null)&&this.closed.equals(rhs.closed))))&&((this.idMemberCreator == rhs.idMemberCreator)||((this.idMemberCreator!= null)&&this.idMemberCreator.equals(rhs.idMemberCreator))))&&((this.desc == rhs.desc)||((this.desc!= null)&&this.desc.equals(rhs.desc))));
     }
+
 }

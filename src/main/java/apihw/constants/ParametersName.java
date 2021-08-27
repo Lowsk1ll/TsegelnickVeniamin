@@ -6,7 +6,6 @@ public class ParametersName {
     public static final String KEY = "key";
     public static final String TOKEN = "token";
     public static final String PREFS_BACKGROUND = "prefs_background";
-    public static final String IDBOARSOURCE = "idBoardSource";
     public static final String BACKGROUND = "background";
     public static final String ID = "id";
     public static final String GREEN = "green";

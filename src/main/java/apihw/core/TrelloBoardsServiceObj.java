@@ -29,8 +29,8 @@ import java.util.Map;
 import org.apache.http.HttpStatus;
 
 public class TrelloBoardsServiceObj {
-    public static URI trelloBoardUri = URI.create(BASE_URL + "boards/");
-    public static final URI baseTrelloBoardUri = URI.create(BASE_URL + "boards/");
+    public static URI trelloBoardUri;
+    public static final URI BASE_TRELLO_BOARD_URI = URI.create(BASE_URL + "boards/");
     private static long requestNumber = 0L;
 
     private Map<String, String> parameters;
@@ -49,7 +49,7 @@ public class TrelloBoardsServiceObj {
     }
 
     public static class ApiRequestBuilder {
-        private Map<String, String> parametrs = new HashMap<>();
+        private Map<String, String> parameters = new HashMap<>();
         private Method requestMethod = Method.GET;
 
         public ApiRequestBuilder setMethod(Method method) {
@@ -58,46 +58,42 @@ public class TrelloBoardsServiceObj {
         }
 
         public ApiRequestBuilder setName(String name) {
-            parametrs.put(NAME, name);
+            parameters.put(NAME, name);
             return this;
         }
 
         public ApiRequestBuilder setDescription(String description) {
-            parametrs.put(DESCRIPTION, description);
+            parameters.put(DESCRIPTION, description);
             return this;
         }
 
         public ApiRequestBuilder setBackground(String background) {
-            parametrs.put(PREFS_BACKGROUND, background);
+            parameters.put(PREFS_BACKGROUND, background);
             return this;
         }
 
         public ApiRequestBuilder setId(String id) {
-            trelloBoardUri = URI.create(BASE_URL + "boards/" + id);
+            trelloBoardUri = URI.create(BASE_TRELLO_BOARD_URI + id);
             return this;
         }
 
         public ApiRequestBuilder updateBackground(String background) {
-            parametrs.put(PREFS_BACKGROUND_UPD, background);
+            parameters.put(PREFS_BACKGROUND_UPD, background);
             return this;
         }
 
         public ApiRequestBuilder updateLabelNamesGreen(String green) {
-            parametrs.put(LABELNAMES_GREEN, green);
+            parameters.put(LABELNAMES_GREEN, green);
             return this;
         }
 
         public ApiRequestBuilder updateLabelNamesYellow(String yellow) {
-            parametrs.put(LABELNAMES_YELLOW, yellow);
+            parameters.put(LABELNAMES_YELLOW, yellow);
             return this;
         }
 
-        public URI getTrelloURI() {
-            return URI.create(BASE_URL + "boards/");
-        }
-
         public TrelloBoardsServiceObj buildRequest() {
-            return new TrelloBoardsServiceObj(parametrs, requestMethod);
+            return new TrelloBoardsServiceObj(parameters, requestMethod);
         }
     }
 
@@ -122,7 +118,7 @@ public class TrelloBoardsServiceObj {
         return RestAssured
             .given(requestSpecification()).log().all()
             .queryParams(parameters)
-            .request(requestMethod, baseTrelloBoardUri)
+            .request(requestMethod, BASE_TRELLO_BOARD_URI)
             .prettyPeek();
     }
 

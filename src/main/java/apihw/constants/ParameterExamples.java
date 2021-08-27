@@ -1,6 +1,6 @@
 package apihw.constants;
 
-public class ParametrExamples {
+public class ParameterExamples {
     public static final String NAME_EXAMPLE = "table";
     public static final String DESCRIPTION_EXAMPLE = "description";
     public static final String PREFS_BACKGROUND_EXAMPLE = "sky";

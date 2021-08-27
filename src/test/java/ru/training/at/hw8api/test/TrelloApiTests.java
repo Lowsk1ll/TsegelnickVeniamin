@@ -1,15 +1,16 @@
 package ru.training.at.hw8api.test;
 
-import static apihw.constants.ParametrExamples.DESCRIPTION_EXAMPLE;
-import static apihw.constants.ParametrExamples.GREEN_NAME_EXAMPLE;
-import static apihw.constants.ParametrExamples.NAME_EXAMPLE;
-import static apihw.constants.ParametrExamples.PREFS_BACKGROUND_EXAMPLE;
-import static apihw.constants.ParametrExamples.UPDATED_NAME;
-import static apihw.constants.ParametrExamples.YELLOW_NAME_EXAMPLE;
+import static apihw.constants.ParameterExamples.DESCRIPTION_EXAMPLE;
+import static apihw.constants.ParameterExamples.GREEN_NAME_EXAMPLE;
+import static apihw.constants.ParameterExamples.NAME_EXAMPLE;
+import static apihw.constants.ParameterExamples.PREFS_BACKGROUND_EXAMPLE;
+import static apihw.constants.ParameterExamples.UPDATED_NAME;
+import static apihw.constants.ParameterExamples.YELLOW_NAME_EXAMPLE;
 import static apihw.core.TrelloBoardsServiceObj.getTrelloAnswer;
 import static apihw.core.TrelloBoardsServiceObj.goodResponseSpecification;
 import static apihw.core.TrelloBoardsServiceObj.requestBuilder;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 
@@ -36,7 +37,7 @@ public class TrelloApiTests {
     }
 
     @Test(groups = {"create"}, dataProvider = "createBoardProvider", dataProviderClass = DataProviderForTrello.class)
-    public void createTable(String name) {
+    public void createBoard(String name) {
         result = getTrelloAnswer(requestBuilder()
             .setName(NAME_EXAMPLE)
             .setMethod(Method.POST)
@@ -49,7 +50,7 @@ public class TrelloApiTests {
     @Test(groups = {"create"},
           dataProvider = "createBoardWithDescriptionProvider",
           dataProviderClass = DataProviderForTrello.class)
-    public void createTableWithDescription(String description) {
+    public void createBoardWithDescription(String description) {
         result = getTrelloAnswer(requestBuilder()
             .setName(NAME_EXAMPLE)
             .setDescription(DESCRIPTION_EXAMPLE)
@@ -64,7 +65,7 @@ public class TrelloApiTests {
     @Test(groups = {"create"},
           dataProvider = "createBoardWithBackgroundProvider",
           dataProviderClass = DataProviderForTrello.class)
-    public void createTableWithBackground(String background) {
+    public void createBoardWithBackground(String background) {
         result = getTrelloAnswer(requestBuilder()
             .setName(NAME_EXAMPLE)
             .setBackground(PREFS_BACKGROUND_EXAMPLE)
@@ -77,7 +78,7 @@ public class TrelloApiTests {
     }
 
     @Test(groups = {"delete"})
-    public void deleteTableWithId() {
+    public void deleteBoardWithId() {
         requestBuilder()
             .setId(boardId)
             .setMethod(Method.DELETE)
@@ -88,7 +89,7 @@ public class TrelloApiTests {
     }
 
     @Test(groups = {"get"})
-    public void getTableWithId() {
+    public void getBoardWithId() {
         TrelloAnswers result = getTrelloAnswer(requestBuilder()
             .setId(boardId)
             .setMethod(Method.GET)
@@ -99,7 +100,7 @@ public class TrelloApiTests {
     }
 
     @Test(groups = {"update"})
-    public void updateTableName() {
+    public void updateBoardName() {
         TrelloAnswers result = getTrelloAnswer(requestBuilder()
             .setId(boardId)
             .setName(UPDATED_NAME)
@@ -111,7 +112,7 @@ public class TrelloApiTests {
     }
 
     @Test(groups = {"update"})
-    public void updateTableDesc() {
+    public void updateBoardDesc() {
         TrelloAnswers result = getTrelloAnswer(requestBuilder()
             .setId(boardId)
             .setDescription(DESCRIPTION_EXAMPLE)
@@ -123,7 +124,7 @@ public class TrelloApiTests {
     }
 
     @Test(groups = {"update"})
-    public void updateTableBackground() {
+    public void updateBoardBackground() {
         TrelloAnswers result = getTrelloAnswer(requestBuilder()
             .setId(boardId)
             .updateBackground(PREFS_BACKGROUND_EXAMPLE)
@@ -139,23 +140,13 @@ public class TrelloApiTests {
         TrelloAnswers result = getTrelloAnswer(requestBuilder()
             .setId(boardId)
             .updateLabelNamesGreen(GREEN_NAME_EXAMPLE)
-            .setMethod(Method.PUT)
-            .buildRequest()
-            .sendRequest());
-        assertThat("Api update table label name green with id: " + boardId, result.getLabelNames(),
-            hasProperty(ParametersName.GREEN, is(GREEN_NAME_EXAMPLE)));
-    }
-
-    @Test(groups = {"update"})
-    public void updateLabelNamesYellow() {
-        TrelloAnswers result = getTrelloAnswer(requestBuilder()
-            .setId(boardId)
             .updateLabelNamesYellow(YELLOW_NAME_EXAMPLE)
             .setMethod(Method.PUT)
             .buildRequest()
             .sendRequest());
-        assertThat("Api update table label name yellow with id: " + boardId, result.getLabelNames(),
-            hasProperty(ParametersName.YELLOW, is(YELLOW_NAME_EXAMPLE)));
+        assertThat("Api update board label name green with id: " + boardId, result.getLabelNames(), allOf(
+            hasProperty(ParametersName.GREEN, is(GREEN_NAME_EXAMPLE)),
+            hasProperty(ParametersName.YELLOW, is(YELLOW_NAME_EXAMPLE))));
     }
 
     @AfterMethod(onlyForGroups = {"create", "update", "get"})
