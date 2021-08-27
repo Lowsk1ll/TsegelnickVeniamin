@@ -15,8 +15,11 @@ public class RequiredParameters {
             properties.load(locator);
             locator.close();
         } catch (IOException e) {
-            System.err.println(e.getMessage());
-            System.err.println("Wrong filename");
+            try {
+                throw new IOException("Wrong filename");
+            } catch (IOException ioException) {
+                System.exit(1);
+            }
         }
         API_KEY = properties.getProperty("key");
         API_TOKEN = properties.getProperty("token");
