@@ -1,6 +1,7 @@
 package ru.training.at.hw7jdi.site.sections.metalcolors.elements;
 
 import com.epam.jdi.light.elements.complex.CanBeSelected;
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.XPath;
 import com.epam.jdi.light.ui.html.elements.common.Checkbox;
 import java.util.stream.Stream;
